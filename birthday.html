@@ -1,0 +1,1407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎉 Ultimate Birthday Experience</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ---------- RESET & BASE ---------- */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html, body { height: 100%; }
+        body {
+            background: radial-gradient(ellipse at 10% 10%, #0b1220 0%, #041026 50%, #020411 100%);
+            color: #fff; 
+            font-family: Inter, system-ui, Arial; 
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+        a { color: inherit; }
+        button { cursor: pointer; border: 0; background: transparent; color: inherit; font: inherit; }
+        .container { max-width: 1100px; margin: 26px auto; padding: 18px; }
+
+        /* ---------- HEADER ---------- */
+        header { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+        .brand { display: flex; align-items: center; gap: 12px; }
+        .logo { 
+            width: 56px; height: 56px; 
+            border-radius: 12px; 
+            background: linear-gradient(135deg, #ff7ab6, #ffd76b); 
+            display: flex; align-items: center; justify-content: center; 
+            font-weight: 800; color: #1b0b12; font-family: 'Playfair Display'; 
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        h1 { font-size: 20px; font-weight: 600; }
+        .controls { display: flex; gap: 8px; align-items: center; }
+
+        /* ---------- HERO ---------- */
+        .hero { display: grid; grid-template-columns: 1fr 420px; gap: 18px; margin-top: 14px; align-items: start; }
+        .card { 
+            background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); 
+            border-radius: 14px; padding: 14px; 
+            box-shadow: 0 10px 40px rgba(2,6,23,0.6); 
+            border: 1px solid rgba(255,255,255,0.03);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(2,6,23,0.8);
+        }
+        .intro h2 { font-family: 'Playfair Display'; font-size: 28px; margin-bottom: 6px; }
+        .muted { color: rgba(255,255,255,0.65); font-size: 13px; }
+
+        /* ---------- PERSONALIZE ---------- */
+        .personalize { display: flex; gap: 8px; align-items: center; margin-top: 8px; }
+        .input { 
+            padding: 8px 10px; border-radius: 10px; 
+            background: rgba(255,255,255,0.03); 
+            border: 1px solid rgba(255,255,255,0.04); 
+            color: inherit; width: 100%; 
+            transition: all 0.3s ease;
+        }
+        .input:focus {
+            outline: none;
+            border-color: rgba(255,122,182,0.3);
+            box-shadow: 0 0 0 3px rgba(255,122,182,0.1);
+        }
+        .btn-primary { 
+            background: linear-gradient(90deg, #ff7ab6, #ffd76b); 
+            color: #1b0b12; padding: 8px 12px; border-radius: 10px; 
+            font-weight: 700; transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255,122,182,0.3);
+        }
+        .btn-primary:active {
+            transform: translateY(1px);
+        }
+
+        /* ---------- PREVIEW / SLIDESHOW ---------- */
+        .preview { height: 360px; border-radius: 12px; overflow: hidden; position: relative; }
+        .slides { height: 100%; display: flex; transition: transform .9s cubic-bezier(.2,.9,.2,1); }
+        .slide { 
+            min-width: 100%; height: 100%; 
+            background-size: contain; background-position: center; 
+            filter: brightness(.95); 
+        }
+        .slide-overlay { position: absolute; inset: 0; background: linear-gradient(180deg,transparent,#02102288); }
+        .controls-mini { display: flex; gap: 8px; position: absolute; right: 12px; bottom: 12px; }
+
+        /* ---------- GRID / MODULES ---------- */
+        .grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-top: 18px; }
+        .module { 
+            min-height: 160px; padding: 12px; border-radius: 12px; 
+            background: linear-gradient(180deg, rgba(255,255,255,0.02),rgba(255,255,255,0.01)); 
+            border: 1px solid rgba(255,255,255,0.03); 
+            display: flex; flex-direction: column; 
+            transition: all 0.3s ease;
+        }
+        .module:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(2,6,23,0.7);
+        }
+        .module h3 { font-size: 15px; margin-bottom: 8px; }
+
+        /* ---------- BALLOONS ---------- */
+        #balloon-field { position: relative; height: 220px; background: linear-gradient(180deg,#071226,#021020); border-radius: 10px; overflow: hidden; }
+        .balloon { 
+            position: absolute; bottom: -60px; width: 68px; height: 92px; 
+            border-radius: 40px; display: flex; align-items: center; justify-content: center; 
+            font-size: 26px; color: #fff; text-shadow: 0 1px 0 rgba(0,0,0,0.6); 
+            box-shadow: 0 8px 24px rgba(0,0,0,0.6); cursor: pointer; 
+            transform-origin: center bottom; transition: transform 0.2s ease;
+        }
+        .balloon:hover { transform: scale(1.1); }
+        .string { position: absolute; bottom: -44px; left: 50%; width: 2px; height: 60px; background: rgba(255,255,255,0.06); transform: translateX(-50%); }
+
+        /* ---------- FIREWORKS & CANVAS ---------- */
+        #fireworks { position: fixed; inset: 0; pointer-events: none; z-index: 60; }
+        #confetti { position: fixed; inset: 0; pointer-events: none; z-index: 65; }
+
+        /* ---------- SCRATCH ---------- */
+        .scratch-container { 
+            position: relative; height: 120px; border-radius: 10px; 
+            overflow: hidden; background: linear-gradient(90deg,#f8e6ff,#ffdfe7);
+        }
+        .scratch { 
+            position: absolute; inset: 0; border-radius: 10px; 
+            overflow: hidden; color: #1a0a12; 
+            display: flex; align-items: center; justify-content: center; 
+            font-weight: 700; z-index: 1; 
+        }
+        .scratch canvas { 
+            position: absolute; inset: 0; width: 100%; height: 100%; 
+            display: block; z-index: 2; cursor: grab; 
+        }
+        .scratch canvas:active { cursor: grabbing; }
+        .scratch-prize {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+            color: #1a0a12;
+            font-weight: 700;
+            z-index: 0;
+            padding: 10px;
+            text-align: center;
+        }
+
+        /* ---------- MAGIC MIRROR ---------- */
+        .magic-mirror-container {
+            position: relative;
+            height: 220px;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .magic-mirror {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #3a1c71, #d76d77, #ffaf7b);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 30px rgba(255,175,123,0.7);
+            position: relative;
+            overflow: hidden;
+        }
+        .magic-mirror-inner {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            background: rgba(0,0,0,0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            padding: 20px;
+            font-size: 14px;
+        }
+        .magic-mirror-effect {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: radial-gradient(circle at center, transparent 40%, rgba(255,255,255,0.2) 100%);
+            animation: mirrorGlow 3s infinite alternate;
+        }
+        @keyframes mirrorGlow {
+            0% { opacity: 0.3; }
+            100% { opacity: 0.7; }
+        }
+
+        /* ---------- MUSIC VISUALIZER ---------- */
+        .visualizer { 
+            height: 60px; border-radius: 8px; 
+            background: linear-gradient(90deg,#021221,#03121a); 
+            display: flex; align-items: end; gap: 6px; padding: 8px; 
+        }
+        .bar { 
+            flex: 1; height: 6px; 
+            background: linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02)); 
+            border-radius: 3px; transform-origin: bottom; 
+            transition: height 0.15s ease;
+        }
+
+        /* ---------- CAKE ---------- */
+        .cake-wrap { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+        .cake { 
+            width: 220px; border-radius: 18px; 
+            background: linear-gradient(180deg,#ffdfe0,#ffbfbf); 
+            padding: 12px; box-shadow: 0 12px 28px rgba(0,0,0,0.5); 
+            position: relative; 
+            transition: transform 0.5s ease;
+        }
+        .cake.cut {
+            transform: scale(0.95);
+            opacity: 0.9;
+        }
+        .tier { 
+            height: 62px; border-radius: 12px; 
+            background: linear-gradient(180deg,#fff,#f3c6c6); 
+            margin-bottom: 6px; position: relative; 
+        }
+        .candle { 
+            position: absolute; left: 50%; top: -12px; width: 10px; height: 28px; 
+            background: linear-gradient(#fff6a8,#ffb04a); transform: translateX(-50%); 
+            border-radius: 4px; display: flex; align-items: center; justify-content: center; 
+            transition: all 0.5s ease;
+        }
+        .candle.blown {
+            opacity: 0.5;
+            transform: translateX(-50%) scale(0.95);
+        }
+        .flame { 
+            width: 10px; height: 14px; border-radius: 50%; 
+            background: radial-gradient(circle at 35% 30%,#fff8,#ffea6b 25%,#ff7a2a 65%); 
+            transform-origin: center; 
+            filter: drop-shadow(0 2px 6px rgba(255,160,60,0.5));
+            transition: all 0.5s ease;
+        }
+        .flame.out {
+            opacity: 0;
+            transform: scale(0);
+        }
+
+        /* ---------- FINAL SCREEN ---------- */
+        .final-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+        .final-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        .final-content {
+            background: linear-gradient(135deg, #0b1220, #041026);
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 600px;
+            width: 90%;
+            box-shadow: 0 0 50px rgba(255,122,182,0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        .final-content::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,122,182,0.1), transparent);
+            transform: rotate(45deg);
+            animation: finalShine 6s infinite linear;
+        }
+        @keyframes finalShine {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+        .big-greet { 
+            font-family: 'Playfair Display'; font-size: 48px; 
+            text-align: center; letter-spacing: 1px; 
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4, #a1c4fd);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: gradientMove 3s ease infinite;
+            margin-bottom: 20px;
+        }
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* ---------- MEMORY SLIDESHOW IMPROVED ---------- */
+        .mem-slideshow-container {
+            position: relative;
+            height: 200px;
+            border-radius: 10px;
+            overflow: hidden;
+            perspective: 1000px;
+        }
+        .mem-slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-size: contain;
+            background-position: center;
+            border-radius: 10px;
+            opacity: 0;
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+        .mem-slide.active {
+            opacity: 1;
+            transform: translateZ(0);
+        }
+        .mem-slide.next {
+            opacity: 0.7;
+            transform: translateZ(-100px) rotateY(10deg);
+        }
+
+        /* ---------- GUEST WISH BOARD IMPROVED ---------- */
+        .guest-wishes {
+            margin-top: 10px;
+            max-height: 180px;
+            overflow: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .guest-wish {
+            padding: 10px;
+            background: linear-gradient(90deg, rgba(255,122,182,0.1), rgba(255,215,107,0.1));
+            border-radius: 8px;
+            border-left: 3px solid #ff7ab6;
+            animation: fadeIn 0.5s ease;
+            transition: transform 0.3s ease;
+        }
+        .guest-wish:hover {
+            transform: translateX(5px);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ---------- FOOTER ---------- */
+        footer { margin-top: 18px; color: rgba(255,255,255,0.45); text-align: center; font-size: 13px; padding-bottom: 40px; }
+
+        /* ---------- RESPONSIVE ---------- */
+        @media(max-width:980px){ 
+            .hero { grid-template-columns:1fr; } 
+            .grid { grid-template-columns:repeat(2,1fr); } 
+            .preview { height:260px; } 
+        }
+        @media(max-width:640px){ 
+            .grid { grid-template-columns:1fr; } 
+            .logo { display:none; } 
+            header { flex-direction: column; align-items: flex-start; }
+            .controls { width: 100%; margin-top: 12px; }
+            #name-input { flex: 1; }
+        }
+
+        /* Toast notifications */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            padding: 12px 20px;
+            border-radius: 8px;
+            z-index: 100;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+        .toast.show {
+            opacity: 1;
+        }
+
+        /* Scratch progress indicator */
+        .scratch-progress {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            background: rgba(0,0,0,0.5);
+            color: white;
+            padding: 4px 8px;
+            borderRadius: 10px;
+            font-size: 12px;
+            z-index: 3;
+        }
+
+        /* Celebration animation */
+        @keyframes celebrate {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        .celebrate {
+            animation: celebrate 0.5s ease;
+        }
+
+        /* Cake cutting animation */
+        .cake-cut-line {
+            position: absolute;
+            height: 100%;
+            width: 3px;
+            background: rgba(0,0,0,0.3);
+            left: 50%;
+            top: 0;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: all 0.5s ease;
+        }
+        .cake-cut-line.show {
+            opacity: 1;
+        }
+
+        /* Timeline animation */
+        .timeline {
+            position: relative;
+            max-width: 100%;
+            height: 4px;
+            background: rgba(255,255,255,0.1);
+            margin: 20px 0;
+            border-radius: 2px;
+        }
+        .timeline-progress {
+            position: absolute;
+            height: 100%;
+            background: linear-gradient(90deg, #ff7ab6, #ffd76b);
+            border-radius: 2px;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        /* Celebration elements */
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Photo frame */
+        .photo-frame {
+            border: 5px solid #ffd76b;
+            border-radius: 10px;
+            padding: 5px;
+            background: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transform: rotate(3deg);
+            transition: transform 0.3s ease;
+        }
+        .photo-frame:hover {
+            transform: rotate(0deg) scale(1.05);
+        } 
+    </style>
+</head>
+<body>
+<canvas id="fireworks"></canvas>
+<canvas id="confetti"></canvas>
+<div class="toast" id="toast"></div>
+<div class="final-overlay" id="final-overlay">
+    <div class="final-content">
+        <div class="big-greet" id="final-greeting">HAPPY BIRTHDAY!</div>
+        <p id="final-message">Your celebration has been amazing! Wishing you all the best!</p>
+        <div style="display:flex;gap:10px;justify-content:center;margin-top:20px">
+            <button id="close-final" class="btn-primary" style="padding:10px 20px">Continue Celebrating</button>
+            <button id="download-final" class="btn-primary" style="padding:10px 20px">Download Memory</button>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <header>
+        <div class="brand">
+            <div class="logo">HB</div>
+            <div>
+                <h1>Ultimate Birthday Experience</h1>
+                <div class="muted">Create magical moments & lasting memories</div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <input id="name-input" class="input" placeholder="Enter name (e.g., Gowtham)" style="width:220px" />
+            <button id="start-btn" class="btn-primary">Begin Celebration</button>
+        </div>
+    </header>
+
+    <main class="hero">
+        <!-- LEFT: Main Experience -->
+        <section class="card intro">
+            <h2 id="hero-title">A magical birthday celebration awaits</h2>
+            <div class="muted">Enter the birthday person's name and click "Begin Celebration" to start the experience</div>
+
+            <div class="personalize" style="margin-top:12px">
+                <input id="photo-url" class="input" placeholder="Paste a URL of a favorite photo" />
+                <button id="use-photo" class="btn-primary" style="width:110px">Use Photo</button>
+            </div>
+
+            <div style="height:12px"></div>
+
+            <!-- slideshow preview -->
+            <div class="preview card" id="preview-card">
+                <div class="slides" id="slides">
+                    <div class="slide" style="background-image:url('puzzleimg.jpg')"></div>
+                    <div class="slide" style="background-image:url('img2.jpg')"></div>
+                    <div class="slide" style="background-image:url('img1.jpg')"></div>
+                    <div class="slide" style="background-image:url('img3.jpg')"></div>
+                    <div class="slide" style="background-image:url('img4.jpg')"></div>
+                </div>
+                <div class="slide-overlay"></div>
+                <div class="controls-mini">
+                    <button id="prev-slide" class="btn-primary" style="padding:6px 8px">◀</button>
+                    <button id="next-slide" class="btn-primary" style="padding:6px 8px">▶</button>
+                </div>
+            </div>
+
+            <div style="height:10px"></div>
+
+            <!-- typewriter + wishes -->
+            <div style="display:flex;gap:12px;align-items:flex-start">
+                <div style="flex:1">
+                    <div class="card" style="padding:10px">
+                        <div id="typewriter" style="min-height:56px;font-weight:600;line-height:1.3">Welcome! Enter a name and click Begin Celebration to start the magic :)</div>
+                        <div style="height:8px"></div>
+                        <div style="display:flex;gap:8px">
+                            <input id="wish-input" class="input" placeholder="Write a special wish here..." />
+                            <button id="add-wish" class="btn-primary">Add Wish</button>
+                        </div>
+                        <div id="wish-list" style="margin-top:10px;max-height:110px;overflow:auto"></div>
+                    </div>
+                </div>
+
+                <div style="width:260px">
+                    <div class="card" style="padding:10px">
+                        <div style="display:flex;justify-content:space-between;align-items:center">
+                            <div style="font-weight:700">Countdown to Celebration</div>
+                            <div id="start-countdown" class="muted">60s</div>
+                        </div>
+                        <div class="timeline">
+                            <div class="timeline-progress" id="timeline-progress"></div>
+                        </div>
+                        <div style="display:flex;gap:8px" id="countdown">
+                            <div style="text-align:center"><div id="cd-s" style="font-weight:800;font-size:20px">60</div><div class="muted">s</div></div>
+                            <div style="flex:1"></div>
+                            <button id="surprise-now" class="btn-primary" style="padding:8px 10px">Surprise Now</button>
+                        </div>
+                    </div>
+
+                    <div style="height:10px"></div>
+
+                    <div class="card" style="padding:10px;text-align:center">
+                        <div style="font-weight:700;margin-bottom:6px">Celebration Music</div>
+                        <audio id="bg-audio" src="Naan-Nee.mp3" type="audio/mpeg" crossorigin></audio>
+                        <div style="height:10px"></div>
+                        <div style="display:flex;gap:8px;justify-content:center">
+                            <button id="play-music" class="btn-primary" style="padding:8px 10px">Play</button>
+                            <button id="stop-music" class="btn-primary" style="padding:8px 10px">Stop</button>
+                        </div>
+                        <div style="height:8px"></div>
+                        <div class="visualizer" id="visualizer"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RIGHT: Mini modules -->
+        <aside class="card" style="display:flex;flex-direction:column;gap:12px">
+            <div>
+                <h3 style="margin-bottom:6px">Balloon Pop Game</h3>
+                <div id="balloon-field" style="margin-bottom:8px"></div>
+                <div style="display:flex;justify-content:space-between;align-items:center">
+                    <div>Score: <strong id="balloon-score">0</strong></div>
+                    <div>Time left: <strong id="balloon-timer">30</strong>s</div>
+                </div>
+                <div style="height:8px"></div>
+                <div style="display:flex;gap:8px">
+                    <button id="start-balloon" class="btn-primary">Start</button>
+                    <button id="stop-balloon" class="btn-primary">Stop</button>
+                </div>
+            </div>
+
+            <div>
+                <h3 style="margin-bottom:6px">Scratch Card Surprise</h3>
+                <div class="scratch-container">
+                    <div class="scratch" id="scratch">
+                        <canvas id="scratch-canvas"></canvas>
+                    </div>
+                    <div class="scratch-prize" id="scratch-prize">
+                        <div>You won a special birthday wish! 🎂</div>
+                        <div style="font-size: 12px; margin-top: 5px;">Happy Birthday!</div>
+                    </div>
+                    <div class="scratch-progress" id="scratch-progress">0%</div>
+                </div>
+            </div>
+
+            <div>
+                <h3 style="margin-bottom:6px">Magic Mirror</h3>
+                <div class="magic-mirror-container">
+                    <div class="magic-mirror">
+                        <div class="magic-mirror-effect"></div>
+                        <div class="magic-mirror-inner" id="magic-mirror-text">Look into the mirror to see your future...</div>
+                    </div>
+                </div>
+                <div style="display:flex;gap:8px;margin-top:8px">
+                    <button id="use-magic-mirror" class="btn-primary" style="flex:1">Use Magic Mirror</button>
+                </div>
+            </div>
+
+            <div>
+                <h3 style="margin-bottom:6px">Birthday Cake</h3>
+                <div class="cake-wrap">
+                    <div class="cake" id="cake">
+                        <div class="cake-cut-line" id="cake-cut-line"></div>
+                        <div class="tier" style="position:relative">
+                            <div class="candle" id="candle">
+                                <div class="flame" id="flame"></div>
+                            </div>
+                        </div>
+                        <div class="tier" style="height:40px;border-radius:10px"></div>
+                    </div>
+                    <div style="display:flex;gap:8px">
+                        <button id="blow-candle" class="btn-primary">Make a Wish</button>
+                        <button id="cut-cake" class="btn-primary">Cut Cake</button>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <h3 style="margin-bottom:6px">Final Celebration</h3>
+                <div style="display:flex;gap:8px">
+                    <button id="show-final" class="btn-primary" style="flex:1">Grand Finale</button>
+                    <button id="download-page" class="btn-primary" style="flex:1">Save Memory</button>
+                </div>
+            </div>
+        </aside>
+    </main>
+
+    <!-- BIG GRID for games / extras -->
+    <section class="grid" style="margin-top:14px">
+        <div class="module card">
+            <h3>Memory Slideshow</h3>
+            <div style="height:12px"></div>
+            <div class="mem-slideshow-container" id="mem-slideshow">
+                <div class="mem-slide active" style="background-image:url('puzzleimg.jpg')"></div>
+                <div class="mem-slide next" style="background-image:url('img1.jpg')"></div>
+                <div class="mem-slide" style="background-image:url('img2.jpg')"></div>
+                <div class="mem-slide" style="background-image:url('img3.jpg')"></div>
+                <div class="mem-slide" style="background-image:url('img2.jpg')"></div>
+            </div>
+        </div>
+
+        <div class="module card">
+            <h3>Guest Wish Board</h3>
+            <div style="display:flex;gap:8px;margin-top:8px">
+                <input id="guest-wish" class="input" placeholder="Send your wishes here..." />
+                <button id="post-guest" class="btn-primary">Post</button>
+            </div>
+            <div class="guest-wishes" id="guest-list"></div>
+        </div>
+
+        <div class="module card">
+            <h3>Memory Book</h3>
+            <div class="memory-book" id="memory-book">
+                <div class="memory-page">
+                    <h4>Birthday Message</h4>
+                    <p>May your day be filled with joy and laughter!</p>
+                </div>
+                <div class="memory-page">
+                    <h4>Fun Fact</h4>
+                    <p>The world's largest birthday cake weighed over 128,000 pounds!</p>
+                </div>
+            </div>
+            <div style="display:flex;gap:8px;margin-top:8px">
+                <button id="add-memory" class="btn-primary">Add Memory</button>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        Created with ❤️ - Save & share this special birthday experience
+    </footer>
+</div>
+
+<script>
+/* =============================
+   Globals & Helpers
+   ============================= */
+const nameInput = document.getElementById('name-input');
+const startBtn = document.getElementById('start-btn');
+const heroTitle = document.getElementById('hero-title');
+const typewriterEl = document.getElementById('typewriter');
+const previewSlides = document.getElementById('slides');
+const memSlideshow = document.getElementById('mem-slideshow');
+const playMusic = document.getElementById('play-music');
+const stopMusic = document.getElementById('stop-music');
+const bgAudio = document.getElementById('bg-audio');
+const toastEl = document.getElementById('toast');
+const guestListEl = document.getElementById('guest-list');
+const flame = document.getElementById('flame');
+const candle = document.getElementById('candle');
+const cake = document.getElementById('cake');
+const cakeCutLine = document.getElementById('cake-cut-line');
+const timelineProgress = document.getElementById('timeline-progress');
+const finalOverlay = document.getElementById('final-overlay');
+const finalGreeting = document.getElementById('final-greeting');
+const finalMessage = document.getElementById('final-message');
+const magicMirrorText = document.getElementById('magic-mirror-text');
+const magicMirrorBtn = document.getElementById('use-magic-mirror');
+
+const defaultSlides = [
+    'puzzleimg.jpg',
+    'img1.jpg',
+    'img2.jpg',
+    'img3.jpg',
+    'img4.jpg'
+];
+
+// Magic mirror predictions
+const magicMirrorPredictions = [
+    "I see a year filled with joy and success!",
+    "Great adventures await you in the coming year!",
+    "Your creativity will lead to amazing opportunities!",
+    "I see laughter, love, and wonderful memories being made!",
+    "This year will bring you closer to your dreams!",
+    "New friendships and strengthened bonds are in your future!",
+    "I see exciting travels and new experiences coming your way!",
+    "Your kindness will return to you multiplied this year!",
+    "Success in your personal and professional life is certain!",
+    "Health, happiness, and prosperity are coming your way!"
+];
+
+let personName = localStorage.getItem('hb_name') || '';
+if(personName) nameInput.value = personName;
+
+// Toast notification function
+function showToast(message, duration = 3000) {
+    toastEl.textContent = message;
+    toastEl.classList.add('show');
+    setTimeout(() => toastEl.classList.remove('show'), duration);
+}
+
+/* Simple typewriter */
+function typewriter(text, el = typewriterEl, speed = 28) {
+    el.textContent = '';
+    let i = 0;
+    const cleaned = text.replace(/\\n/g, '\n');
+    const iv = setInterval(() => {
+        el.textContent += cleaned[i++] || '';
+        if(i > cleaned.length) clearInterval(iv);
+    }, speed);
+}
+
+/* slide control */
+let slideIndex = 0;
+function showSlide(idx) {
+    previewSlides.style.transform = `translateX(-${idx*100}%)`;
+}
+document.getElementById('prev-slide').onclick = () => { slideIndex = (slideIndex-1+5)%5; showSlide(slideIndex); };
+document.getElementById('next-slide').onclick = () => { slideIndex = (slideIndex+1)%5; showSlide(slideIndex); };
+setInterval(()=>{ slideIndex=(slideIndex+1)%5; showSlide(slideIndex); },4500);
+
+/* replace preview from custom photo */
+document.getElementById('use-photo').onclick = () => {
+    const url = document.getElementById('photo-url').value.trim();
+    if(!url) return showToast('Enter a photo URL first');
+    // replace slides and puzzle / slideshow
+    const slides = previewSlides.querySelectorAll('.slide');
+    slides.forEach((s,i)=> s.style.backgroundImage = `url('${url}?v=${i}')`);
+    buildMemSlideshow(url);
+    showToast('Photo added to the celebration!');
+};
+
+/* =============================
+   Music + Visualizer
+   ============================= */
+const viz = document.getElementById('visualizer');
+const bars = [];
+for(let i=0;i<20;i++){ const b=document.createElement('div'); b.className='bar'; viz.appendChild(b); bars.push(b); }
+const AudioContext = window.AudioContext || window.webkitAudioContext;
+let audioCtx, analyser, sourceNode;
+function initAudio() {
+    if(audioCtx) return;
+    audioCtx = new AudioContext();
+    analyser = audioCtx.createAnalyser();
+    analyser.fftSize = 128;
+    sourceNode = audioCtx.createMediaElementSource(bgAudio);
+    sourceNode.connect(analyser);
+    analyser.connect(audioCtx.destination);
+    const data = new Uint8Array(analyser.frequencyBinCount);
+    function frame(){
+        analyser.getByteFrequencyData(data);
+        for(let i=0;i<bars.length;i++){
+            const v = data[i] || 0; bars[i].style.height = Math.max(6,(v/255)*60)+'px';
+        }
+        requestAnimationFrame(frame);
+    }
+    frame();
+}
+playMusic.onclick = async () => {
+    if(audioCtx && audioCtx.state === 'suspended') await audioCtx.resume();
+    initAudio();
+    try {
+        await bgAudio.play();
+        playMusic.textContent = 'Playing';
+        showToast('Celebration music started!');
+    } catch (e) {
+        showToast('Could not play music. Click again.');
+    }
+};
+stopMusic.onclick = () => { 
+    bgAudio.pause(); 
+    bgAudio.currentTime = 0; 
+    playMusic.textContent = 'Play'; 
+    showToast('Music paused');
+};
+
+/* =============================
+   Persistent Wish Board
+   ============================= */
+const wishList = document.getElementById('wish-list');
+const wishInput = document.getElementById('wish-input');
+const addWishBtn = document.getElementById('add-wish');
+
+function loadWishes(){
+    const arr = JSON.parse(localStorage.getItem('hb_wishes')||'[]');
+    wishList.innerHTML='';
+    arr.reverse().forEach(w => {
+        const d = document.createElement('div'); 
+        d.style.padding='6px'; 
+        d.style.marginBottom='6px'; 
+        d.style.background='rgba(255,255,255,0.02)'; 
+        d.style.borderRadius = '6px';
+        d.textContent = w;
+        wishList.appendChild(d);
+    });
+}
+addWishBtn.onclick = ()=>{
+    const t = wishInput.value.trim(); if(!t) return showToast('Write a wish first');
+    const arr = JSON.parse(localStorage.getItem('hb_wishes')||'[]');
+    arr.push((personName?personName+': ':'')+t);
+    localStorage.setItem('hb_wishes', JSON.stringify(arr));
+    wishInput.value=''; loadWishes();
+    showToast('Wish added to the memory book!');
+};
+loadWishes();
+
+/* Guest wish board */
+const guestInput = document.getElementById('guest-wish');
+document.getElementById('post-guest').onclick = () => {
+    const t = guestInput.value.trim(); if(!t) return showToast('Write a message first');
+    const arr = JSON.parse(localStorage.getItem('hb_guest')||'[]'); arr.push(t);
+    localStorage.setItem('hb_guest', JSON.stringify(arr));
+    guestInput.value=''; renderGuest();
+    showToast('Message posted to the wish board!');
+};
+function renderGuest(){
+    guestListEl.innerHTML=''; const arr = JSON.parse(localStorage.getItem('hb_guest')||'[]'); arr.slice().reverse().forEach(g=>{
+        const d=document.createElement('div'); 
+        d.className = 'guest-wish';
+        d.textContent=g; 
+        guestListEl.appendChild(d);
+    });
+}
+renderGuest();
+
+/* =============================
+   Countdown demo
+   ============================= */
+let countdownEnd = null;
+document.getElementById('start-countdown').onclick = () => {};
+document.getElementById('surprise-now').onclick = triggerFinal;
+function startDemoCountdown(secs=60){
+    countdownEnd = Date.now() + secs*1000;
+    const cdS = document.getElementById('cd-s');
+    const iv = setInterval(()=> {
+        const left = Math.max(0, Math.round((countdownEnd - Date.now())/1000));
+        cdS.textContent = String(left).padStart(2,'0');
+        timelineProgress.style.width = `${100 - (left/secs * 100)}%`;
+        if(left<=0) { clearInterval(iv); triggerFinal(); }
+    },250);
+}
+startDemoCountdown(60);
+
+/* =============================
+   Balloon Pop Game
+   ============================= */
+const field = document.getElementById('balloon-field');
+let balloonTimer = null, balloonInterval = null;
+let balloonScore = 0; let balloonTimeLeft = 30;
+function spawnBalloon() {
+    const b = document.createElement('div');
+    b.className='balloon';
+    const colors = [
+        'linear-gradient(180deg,#ff8ab6,#ff6b6b)',
+        'linear-gradient(180deg,#a1c4fd,#c2e9fb)',
+        'linear-gradient(180deg,#fbc2eb,#a18cd1)',
+        'linear-gradient(180deg,#b6f5d6,#5ce3a8)'
+    ];
+    const w = 54 + Math.round(Math.random()*40);
+    b.style.width = w+'px'; b.style.height = Math.round(w*1.25)+'px';
+    b.style.left = (5 + Math.random()*85) + '%';
+    b.style.background = colors[Math.floor(Math.random()*colors.length)];
+    b.innerHTML = '🎈<div class="string"></div>';
+    field.appendChild(b);
+    const rise = 4000 + Math.random()*4000;
+    b.animate([{transform:'translateY(0) scale(1)'},{transform:`translateY(-${260 + Math.random()*120}px) scale(1.02)`}],{duration:rise, easing:'linear'}).onfinish = ()=>{ if(b.parentNode) b.remove(); };
+    b.onclick = (e)=>{
+        e.stopPropagation();
+        balloonScore += 10;
+        document.getElementById('balloon-score').textContent = balloonScore;
+        popEffect(b);
+        b.remove();
+    };
+}
+/* small pop particle */
+function popEffect(el){
+    const p = document.createElement('div'); 
+    p.textContent = '✨'; 
+    p.style.position='absolute'; 
+    p.style.left = el.style.left; 
+    p.style.bottom = '40%'; 
+    p.style.fontSize = '18px'; 
+    p.style.zIndex = '10';
+    p.style.pointerEvents = 'none';
+    document.body.appendChild(p);
+    p.animate([
+        { opacity: 1, transform: 'translateY(0) scale(1)' },
+        { opacity: 0, transform: 'translateY(-40px) scale(2)' }
+    ], { duration: 900, easing: 'ease-out' });
+    setTimeout(()=>p.remove(),900);
+}
+
+document.getElementById('start-balloon').onclick = () => {
+    startBalloon(30);
+};
+document.getElementById('stop-balloon').onclick = stopBalloon;
+
+function startBalloon(seconds=30) {
+    stopBalloon();
+    balloonScore = 0; balloonTimeLeft = seconds;
+    document.getElementById('balloon-score').textContent = '0';
+    document.getElementById('balloon-timer').textContent = balloonTimeLeft;
+    balloonInterval = setInterval(()=> spawnBalloon(), 700);
+    balloonTimer = setInterval(()=> {
+        balloonTimeLeft--; document.getElementById('balloon-timer').textContent = balloonTimeLeft;
+        if(balloonTimeLeft<=0) stopBalloon();
+    },1000);
+    showToast('Balloon game started! Pop as many as you can!');
+}
+function stopBalloon(){
+    clearInterval(balloonInterval); clearInterval(balloonTimer);
+    balloonInterval = null; balloonTimer = null;
+    // remove existing balloons gently
+    Array.from(field.querySelectorAll('.balloon')).forEach(b=>{
+        b.animate([
+            { opacity: 1, transform: 'translateY(0) scale(1)' },
+            { opacity: 0, transform: 'translateY(20px) scale(0.5)' }
+    ], { duration: 500 }).onfinish = () => b.remove();
+    });
+    showToast(`Game over! Your score: ${balloonScore}`);
+}
+
+/* =============================
+   Scratch Card - FIXED
+   ============================= */
+const scratchCanvas = document.getElementById('scratch-canvas');
+const scratchCtx = scratchCanvas.getContext('2d');
+const scratchProgress = document.getElementById('scratch-progress');
+const scratchPrize = document.getElementById('scratch-prize');
+let scratchPixelsTotal = 0;
+let scratchPixelsCleared = 0;
+
+function fitScratch(){
+    scratchCanvas.width = scratchCanvas.clientWidth * devicePixelRatio;
+    scratchCanvas.height = scratchCanvas.clientHeight * devicePixelRatio;
+    scratchCtx.scale(devicePixelRatio, devicePixelRatio);
+    
+    // Draw scratch-off overlay
+    scratchCtx.fillStyle = '#888';
+    scratchCtx.fillRect(0, 0, scratchCanvas.clientWidth, scratchCanvas.clientHeight);
+    
+    // Add scratch texture
+    scratchCtx.fillStyle = '#aaa';
+    for (let i = 0; i < 200; i++) {
+        const x = Math.random() * scratchCanvas.clientWidth;
+        const y = Math.random() * scratchCanvas.clientHeight;
+        const size = 1 + Math.random() * 3;
+        scratchCtx.beginPath();
+        scratchCtx.arc(x, y, size, 0, Math.PI * 2);
+        scratchCtx.fill();
+    }
+    
+    scratchCtx.globalCompositeOperation = 'destination-out';
+    
+    // Calculate total pixels for progress tracking
+    scratchPixelsTotal = scratchCanvas.width * scratchCanvas.height;
+    updateScratchProgress();
+}
+fitScratch(); 
+window.addEventListener('resize', fitScratch);
+
+let isDrawing = false;
+function scratchStart(e){ 
+    isDrawing=true; 
+    scratchMove(e); 
+}
+function scratchEnd(){ isDrawing=false; }
+function scratchMove(e){
+    if(!isDrawing) return;
+    const r = scratchCanvas.getBoundingClientRect();
+    const x = (e.touches?e.touches[0].clientX:e.clientX) - r.left;
+    const y = (e.touches?e.touches[0].clientY:e.clientY) - r.top;
+    
+    scratchCtx.beginPath(); 
+    scratchCtx.arc(x, y, 26, 0, Math.PI*2); 
+    scratchCtx.fill();
+    
+    updateScratchProgress();
+}
+
+function updateScratchProgress() {
+    // Get the current image data to calculate scratched area
+    const imageData = scratchCtx.getImageData(0, 0, scratchCanvas.width, scratchCanvas.height);
+    const pixels = imageData.data;
+    let transparentPixels = 0;
+    
+    for (let i = 0; i < pixels.length; i += 4) {
+        if (pixels[i + 3] === 0) {
+            transparentPixels++;
+        }
+    }
+    
+    scratchPixelsCleared = transparentPixels;
+    const percentage = Math.round((scratchPixelsCleared / scratchPixelsTotal) * 100);
+    scratchProgress.textContent = `${percentage}%`;
+    
+    // If more than 60% is scratched, reveal the full prize
+    if (percentage > 60) {
+        scratchCtx.clearRect(0, 0, scratchCanvas.width, scratchCanvas.height);
+        scratchProgress.textContent = 'Complete!';
+        scratchProgress.style.background = '#4CAF50';
+        showToast('You revealed the surprise!');
+        scratchPrize.style.zIndex = '3';
+        scratchPrize.classList.add('celebrate');
+    }
+}
+
+scratchCanvas.addEventListener('mousedown', scratchStart); 
+window.addEventListener('mouseup', scratchEnd);
+scratchCanvas.addEventListener('mousemove', scratchMove);
+scratchCanvas.addEventListener('touchstart', scratchStart); 
+window.addEventListener('touchend', scratchEnd);
+
+/* =============================
+   Magic Mirror Feature
+   ============================= */
+magicMirrorBtn.onclick = () => {
+    // Get a random prediction
+    const prediction = magicMirrorPredictions[Math.floor(Math.random() * magicMirrorPredictions.length)];
+    
+    // Animate the mirror
+    magicMirrorText.style.opacity = '0';
+    
+    setTimeout(() => {
+        magicMirrorText.textContent = prediction;
+        magicMirrorText.style.opacity = '1';
+        magicMirrorText.classList.add('celebrate');
+        
+        // Add special effects
+        burstConfetti();
+        spawnFirework(innerWidth/2, innerHeight/2);
+        
+        showToast('The magic mirror has spoken!');
+    }, 1000);
+};
+
+/* =============================
+   Memory Slideshow - IMPROVED
+   ============================= */
+function buildMemSlideshow(custom) {
+    const memSlides = memSlideshow.querySelectorAll('.mem-slide');
+    const arr = custom ? [custom+'?v=1', custom+'?v=2', custom+'?v=3'] : defaultSlides;
+    
+    memSlides.forEach((slide, i) => {
+        slide.style.backgroundImage = `url('${arr[i % arr.length]}')`;
+    });
+}
+
+let memSlideIndex = 0;
+function rotateMemSlideshow() {
+    const slides = memSlideshow.querySelectorAll('.mem-slide');
+    
+    // Remove all classes
+    slides.forEach(slide => {
+        slide.classList.remove('active', 'next');
+    });
+    
+    // Set new classes
+    slides[memSlideIndex].classList.add('next');
+    slides[(memSlideIndex + 1) % slides.length].classList.add('active');
+    
+    memSlideIndex = (memSlideIndex + 1) % slides.length;
+}
+
+// Initialize memory slideshow
+buildMemSlideshow();
+setInterval(rotateMemSlideshow, 3000);
+
+/* =============================
+   Memory Book
+   ============================= */
+document.getElementById('add-memory').onclick = () => {
+    const memoryBook = document.getElementById('memory-book');
+    const newMemory = document.createElement('div');
+    newMemory.className = 'memory-page';
+    newMemory.innerHTML = `
+        <h4>New Memory</h4>
+        <p>This is a special moment worth remembering!</p>
+        <p>Happy Birthday Alagu</p>
+    `;
+    memoryBook.appendChild(newMemory);
+    showToast('New memory added to the book!');
+};
+
+
+/* =============================
+   Candle / Cake interactions - IMPROVED
+   ============================= */
+let flameInterval;
+function flickerStart(){ 
+    flameInterval = setInterval(()=> {
+        const s = 0.9 + Math.random()*0.3; 
+        flame.style.transform = `scale(${s}) translateY(${Math.random()*2}px)`;
+    }, 120); 
+}
+function flickerStop(){ 
+    clearInterval(flameInterval); 
+    flame.style.transform = 'scale(0)'; 
+}
+
+// Start the flame animation
+flickerStart();
+
+document.getElementById('blow-candle').onclick = async () => {
+    // Add blowing animation
+    document.getElementById('blow-candle').classList.add('celebrate');
+    setTimeout(() => document.getElementById('blow-candle').classList.remove('celebrate'), 1000);
+    
+    // Candle blow animation
+    flame.classList.add('out');
+    candle.classList.add('blown');
+    flickerStop();
+    
+    // Add celebration effects
+    burstConfetti();
+    spawnFirework(innerWidth/2, innerHeight/2);
+    
+    setTimeout(()=> {
+        showToast(`Make a wish, ${personName || 'friend'}! 🎂`);
+    },600);
+};
+
+document.getElementById('cut-cake').onclick = () => {
+    // Add cutting animation
+    document.getElementById('cut-cake').classList.add('celebrate');
+    setTimeout(() => document.getElementById('cut-cake').classList.remove('celebrate'), 1000);
+    
+    // Show cut line
+    cakeCutLine.classList.add('show');
+    cake.classList.add('cut');
+    
+    // Add celebration
+    showToast('Cake cut! Share a slice 🍰');
+    burstConfetti();
+    
+    // Move to final celebration after a delay
+    setTimeout(() => {
+        triggerFinal();
+    }, 2000);
+};
+
+/* =============================
+   Final / Fireworks / Confetti
+   ============================= */
+const fwCanvas = document.getElementById('fireworks'), fwCtx = fwCanvas.getContext('2d');
+const confCanvas = document.getElementById('confetti'), confCtx = confCanvas.getContext('2d');
+function fitCanvases(){
+    fwCanvas.width = innerWidth; fwCanvas.height = innerHeight;
+    confCanvas.width = innerWidth; confCanvas.height = innerHeight;
+}
+fitCanvases(); 
+window.addEventListener('resize', fitCanvases);
+
+// fireworks particles
+let fwParticles = [];
+function spawnFirework(x,y){
+    const count = 28 + Math.random()*30;
+    for(let i=0;i<count;i++){
+        fwParticles.push({
+            x,y, vx:(Math.random()-0.5)*6, vy:(Math.random()-0.5)*6, life: 60 + Math.random()*40,
+            color: ['#ffb86b','#ffd56b','#ff6b6b','#b6f5d6','#c2a3ff'][Math.floor(Math.random()*5)]
+        });
+    }
+}
+fwCanvas.addEventListener('click', e => spawnFirework(e.clientX, e.clientY));
+
+function drawFireworks(){
+    fwCtx.clearRect(0,0,fwCanvas.width,fwCanvas.height);
+    for(let i=fwParticles.length-1;i>=0;i--){
+        const p = fwParticles[i];
+        fwCtx.globalAlpha = Math.max(0, p.life/80);
+        fwCtx.fillStyle = p.color;
+        fwCtx.beginPath(); fwCtx.arc(p.x, p.y, Math.max(1, p.life/12), 0, Math.PI*2); fwCtx.fill();
+        p.x += p.vx; p.y += p.vy; p.vy += 0.06; p.life--;
+        if(p.life<=0) fwParticles.splice(i,1);
+    }
+    requestAnimationFrame(drawFireworks);
+}
+drawFireworks();
+
+// confetti simple
+let confettiPieces = [];
+function burstConfetti(){
+    for(let i=0;i<120;i++){
+        confettiPieces.push({
+            x: innerWidth*Math.random(), y: -20 - Math.random()*200,
+            vx: (Math.random()-0.5)*3, vy: 2 + Math.random()*4,
+            rot: Math.random()*360, vr: (Math.random()-0.5)*8,
+            w: 6 + Math.random()*12, h: 8 + Math.random()*10,
+            color: ['#ff7ab6','#ffd76b','#8be6ff','#b6f5d6'][Math.floor(Math.random()*4)]
+        });
+    }
+}
+function drawConfetti(){
+    confCtx.clearRect(0,0,confCanvas.width,confCanvas.height);
+    for(let i=confettiPieces.length-1;i>=0;i--){
+        const p = confettiPieces[i];
+        confCtx.save();
+        confCtx.translate(p.x,p.y); confCtx.rotate(p.rot*Math.PI/180);
+        confCtx.fillStyle = p.color;
+        confCtx.fillRect(-p.w/2, -p.h/2, p.w, p.h);
+        confCtx.restore();
+        p.x += p.vx; p.y += p.vy; p.rot += p.vr;
+        if(p.y > innerHeight + 50) confettiPieces.splice(i,1);
+    }
+    requestAnimationFrame(drawConfetti);
+}
+drawConfetti();
+
+/* Final trigger function - FIXED */
+function triggerFinal(){
+    // prepare personalized greeting
+    saveName();
+    const name = personName || 'Friend';
+    typewriter(`HAPPY BIRTHDAY, ${name.toUpperCase()}! 🎉\nEnjoy the surprises — fireworks, music & memories!`, typewriterEl, 18);
+    burstConfetti();
+    spawnFirework(innerWidth*0.3, innerHeight*0.4);
+    spawnFirework(innerWidth*0.7, innerHeight*0.5);
+    
+    // Update final overlay with personalized message
+    finalGreeting.textContent = `HAPPY BIRTHDAY ${name.toUpperCase()}!`;
+    finalMessage.textContent = `May your special day be filled with joy, laughter, and wonderful memories that will last a lifetime!`;
+    
+    // Show the final overlay
+    finalOverlay.classList.add('active');
+    
+    // play music
+    initAudio(); 
+    bgAudio.play();
+    
+    // Continuous fireworks for the finale
+    const fireworkInterval = setInterval(() => {
+        spawnFirework(Math.random()*innerWidth, Math.random()*innerHeight*0.6);
+        burstConfetti();
+    }, 800);
+    
+    // Stop fireworks after 10 seconds
+    setTimeout(() => clearInterval(fireworkInterval), 10000);
+}
+
+// Close final overlay
+document.getElementById('close-final').onclick = () => {
+    finalOverlay.classList.remove('active');
+};
+
+// Download from final overlay
+document.getElementById('download-final').onclick = () => {
+    downloadThisPage();
+};
+
+/* =============================
+   Download page
+   ============================= */
+function downloadThisPage(){
+    const html = '<!doctype html>\n' + document.documentElement.outerHTML;
+    const blob = new Blob([html], {type:'text/html'}); const url = URL.createObjectURL(blob);
+    const a = document.createElement('a'); a.href = url; a.download = 'birthday-surprise.html'; a.click(); URL.revokeObjectURL(url);
+    showToast('Page downloaded! You can save this memory forever!');
+}
+document.getElementById('download-page').onclick = downloadThisPage;
+document.getElementById('show-final').onclick = () => {
+    saveName();
+    triggerFinal();
+};
+
+/* =============================
+   Save name
+   ============================= */
+function saveName(){
+    personName = (nameInput.value || '').trim();
+    if(personName) localStorage.setItem('hb_name', personName);
+    heroTitle.textContent = personName ? `Celebration for ${personName}` : 'A magical birthday celebration awaits';
+}
+
+/* Start Surprise button */
+startBtn.onclick = async () => {
+    saveName();
+    startBtn.textContent = 'Starting…';
+    startBtn.disabled = true;
+    // personalize slides quick message
+    typewriter(`Hey ${personName || 'friend'} — let the celebration begin! 🎉`, typewriterEl, 14);
+    // small bursts
+    burstConfetti();
+    spawnFirework(innerWidth*0.5, innerHeight*0.2);
+    // start music after user action
+    initAudio();
+    try { 
+        await bgAudio.play(); 
+        playMusic.textContent='Playing'; 
+    } catch(e){ 
+        showToast('Click Play Music to start audio');
+    }
+    // start balloon demo
+    startBalloon(25);
+    // prepare final triggers
+    setTimeout(()=> { 
+        startBtn.disabled=false; 
+        startBtn.textContent='Begin Celebration'; 
+        showToast('Celebration started! Enjoy the magical moments!');
+    }, 1600);
+};
+
+/* =============
+   Small helper: adding initial sample content
+   ============= */
+if(!localStorage.getItem('hb_wishes')) {
+    localStorage.setItem('hb_wishes', JSON.stringify(['Have a joyful year ahead!', 'May your dreams come true 🎯']));
+    loadWishes();
+}
+if(!localStorage.getItem('hb_guest')) { 
+    localStorage.setItem('hb_guest', JSON.stringify(['Happy Birthday!','Wishing you all the best 🎉'])); 
+    renderGuest(); 
+}
+
+/* =============
+   Download utility already defined earlier
+   ============= */
+
+/* small UX: allow pressing Enter to start */
+nameInput.addEventListener('keydown', (e)=> { if(e.key === 'Enter') startBtn.click(); });
+
+/* allow clicking on fireworks canvas to spawn fireworks */
+fwCanvas.style.display = 'block';
+confCanvas.style.display = 'block';
+
+/* End of script */
+</script>
+</body>
+</html>
